@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 var service = require('./service');
+var showTest = require('./showTest');
 var routes = require('./routes');
 var api = require('./routes/api');
 var leadTime = require('./service/leadTime');
@@ -48,6 +49,7 @@ app.get('/raw_api_call', service.rawApiCall);
 app.get('/simpler_api_call', service.simplerApiCall);
 app.get('/project/:pIndex', service.projectByIndex);
 app.get('/leadTime', leadTime.teste);
+app.get('/show_test', showTest.showTest);
 
 
 // redirect all others to the index (HTML5 history)
