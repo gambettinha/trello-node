@@ -18,7 +18,6 @@ var data = {
 };
 
 // GET
-
 exports.posts = function (req, res) {
   var posts = [];
   data.posts.forEach(function (post, i) {
@@ -45,14 +44,12 @@ exports.post = function (req, res) {
 };
 
 // POST
-
 exports.addPost = function (req, res) {
   data.posts.push(req.body);
   res.json(req.body);
 };
 
 // PUT
-
 exports.editPost = function (req, res) {
   var id = req.params.id;
 
@@ -65,7 +62,6 @@ exports.editPost = function (req, res) {
 };
 
 // DELETE
-
 exports.deletePost = function (req, res) {
   var id = req.params.id;
 
