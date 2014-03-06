@@ -5,6 +5,26 @@ var Client = require('node-rest-client').Client;
 var _ = require('lodash');
 
 
+exports.new_call = function (req, resp) {	
+	http.get('http://10.99.2.175:7070/api/v1/teams/boards/1/queues/1/cards/1', function (res) {
+		res.setEncoding('utf8');
+		res.on('data', function (data) {
+			resp.setHeader("Content-Type", "text/plain");
+			var result = JSON.parse(data);
+
+			var text = 'integration Tests Fixed = '+result.testInfo.integrationTestsFixed + '\n' ;
+			text += 'integration Tests = '+result.testInfo.integrationTests  + '\n' ; 
+			text += 'unit Tests = '  +result.testInfo.unitTests  ; 
+
+			var fixed = result.testInfo.integrationTestsFixed;
+			var integration = result.testInfo.integrationTests;
+			var unit = result.testInfo.unitTests;
+
+			resp.send(text);	
+		});
+	});
+}
+
 exports.rawApiCall = function (req, resp) {	
 	http.get('http://www.mocky.io/v2/52f3766070d88c4f01c9111b', function (res) {
 		res.setEncoding('utf8');
