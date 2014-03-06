@@ -5,7 +5,7 @@ var Client = require('node-rest-client').Client;
 var _ = require('lodash');
 var nodemailer = require("nodemailer");
 
-// create reusable transport method (opens pool of SMTP connections)
+
 var smtpTransport = nodemailer.createTransport("SMTP",{
     service: "Gmail",
     auth: {
@@ -15,7 +15,6 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 });
 
 function mailOptions(msg){
-	// setup e-mail data with unicode symbols
 	var mailOptions = {
 	    from: "Trello Ilegra ✔ <valeilegra@gmail.com>", // sender address
 	    to: "salerno.rafael@gmail.com", // list of receivers
@@ -34,12 +33,7 @@ exports.new_call = function (req, resp) {
 			resp.setHeader("Content-Type", "text/plain");
 			var result = JSON.parse(data);
 
-			var fixed = result.testInfo.integrationTestsFixed;
-			var integration = result.testInfo.integrationTests;
-			var unit = result.testInfo.unitTests;
-
-
-			resp.send(alert('test',fixed,integration,unit));	
+			resp.send(alert('test',result.testInfo.integrationTestsFixed,result.testInfo.integrationTests,result.testInfo.unitTests));	
 		});
 	});
 }
@@ -55,19 +49,20 @@ function alert(card, integrationTestsFixed, integrationTests, unitTests) {
 	var msg="";
 	if(res.length > 0) msg=  "Card: " + card + ". " + res;
 
-     // send mail with defined transport object
-		smtpTransport.sendMail(mailOptions(msg), function(error, response){
-		    if(error){
-		        console.log(error);
-		    }else{
-		        console.log("Message sent ");
-		    }
-
-		    // if you don't want to use this transport object anymore, uncomment following line
-		    //smtpTransport.close(); // shut down the connection pool, no more messages
-		});
+    sendEmail(msg);
 
 	return msg;
+}
+
+function sendEmail(msg){
+ smtpTransport.sendMail(mailOptions(msg), function(error, response){
+	    if(error){
+	        console.log(error);
+	    }else{
+	        console.log("Message sent ");
+	    }
+
+	});
 }
 
 exports.callAllBords = function (req, resp) {	
