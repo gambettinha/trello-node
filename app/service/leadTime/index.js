@@ -6,5 +6,5 @@ var _ = require('lodash');
 
 
 exports.teste = function (req, resp) {	
-	res.send('hello lead time');
+	resp.send('hello lead time');
 }
