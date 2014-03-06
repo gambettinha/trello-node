@@ -37,7 +37,7 @@ app.post('/api/post', api.addPost);
 app.put('/api/post/:id', api.editPost);
 app.delete('/api/post/:id', api.deletePost);
 
-// TRELLO-NODE stuff
+
 app.get('/hello.txt', function(req, res) {
   res.send('Hello World');
 });
@@ -47,9 +47,9 @@ app.get('/new_call', service.new_call);
 app.get('/raw_api_call', service.rawApiCall);
 app.get('/simpler_api_call', service.simplerApiCall);
 app.get('/project/:pIndex', service.projectByIndex);
-
 app.get('/leadTime', leadTime.teste);
 
+app.get('*', routes.index);
 app.listen(3000);
 console.log('Listening on port 3000');
 
