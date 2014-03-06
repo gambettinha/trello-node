@@ -4,7 +4,6 @@ var express = require('express');
 var app = express();
 var service = require('./service');
 var routes = require('./routes');
-var api = require('./routes/api');
 var leadTime = require('./service/leadTime');
 
 // Configuration
@@ -30,18 +29,10 @@ app.use(express.bodyParser());
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
-// JSON API
-app.get('/api/posts', api.posts);
-app.get('/api/post/:id', api.post);
-app.post('/api/post', api.addPost);
-app.put('/api/post/:id', api.editPost);
-app.delete('/api/post/:id', api.deletePost);
-
 // TRELLO-NODE stuff
 app.get('/hello.txt', function(req, res) {
   res.send('Hello World');
 });
-
 
 app.get('/new_call', service.new_call);
 app.get('/raw_api_call', service.rawApiCall);
