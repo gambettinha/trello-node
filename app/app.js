@@ -37,7 +37,7 @@ app.put('/api/post/:id', api.editPost);
 app.delete('/api/post/:id', api.deletePost);
 
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
+//app.get('*', routes.index);
 
 // TRELLO-NODE stuff
 app.get('/hello.txt', function(req, res) {
@@ -50,6 +50,7 @@ app.get('/raw_api_call', service.rawApiCall);
 app.get('/simpler_api_call', service.simplerApiCall);
 app.get('/project/:pIndex', service.projectByIndex);
 
+app.get('*', routes.index);
 app.listen(3000);
 console.log('Listening on port 3000');
 
