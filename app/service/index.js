@@ -25,6 +25,18 @@ exports.new_call = function (req, resp) {
 	});
 }
 
+exports.callAllBords = function (req, resp) {	
+	http.get('http://10.99.2.175:7070/api/v1/teams/boards', function (res) {
+		res.setEncoding('utf8');
+		res.on('data', function (data) {
+			resp.setHeader("Content-Type", "text/plain");
+			
+
+			resp.send(data);	
+		});
+	});
+}
+
 exports.rawApiCall = function (req, resp) {	
 	http.get('http://www.mocky.io/v2/52f3766070d88c4f01c9111b', function (res) {
 		res.setEncoding('utf8');

@@ -44,6 +44,7 @@ app.get('/hello.txt', function(req, res) {
 
 
 app.get('/new_call', service.new_call);
+app.get('/callAllBords', service.callAllBords);
 app.get('/raw_api_call', service.rawApiCall);
 app.get('/simpler_api_call', service.simplerApiCall);
 app.get('/project/:pIndex', service.projectByIndex);
