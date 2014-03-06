@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 var service = require('./service');
+var alertTest = require('./alertTest');
 var routes = require('./routes');
 var leadTime = require('./service/leadTime');
 
@@ -29,17 +30,16 @@ app.use(express.bodyParser());
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
-// TRELLO-NODE stuff
-app.get('/hello.txt', function(req, res) {
-  res.send('Hello World');
-});
-
 app.get('/new_call', service.new_call);
 app.get('/raw_api_call', service.rawApiCall);
 app.get('/simpler_api_call', service.simplerApiCall);
 app.get('/project/:pIndex', service.projectByIndex);
-
 app.get('/leadTime', leadTime.teste);
+app.get('/alert_test', alertTest.alertTest);
+
+
+// redirect all others to the index (HTML5 history)
+app.get('*', routes.index);
 
 app.listen(3000);
 console.log('Listening on port 3000');
