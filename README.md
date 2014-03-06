@@ -20,8 +20,8 @@ It will download the virtual machine.
 
 ###Configure Vagrant box
 
-    $ git clone https://github.com/gambettinha/hello-node.git
-    $ cd hello-node 
+    $ git clone https://github.com/gambettinha/trello-node.git
+    $ cd trello-node 
     $ vagrant up
     
 It will set up your environment. Let's connect into it
