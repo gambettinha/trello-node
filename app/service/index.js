@@ -3,6 +3,28 @@
 var http = require('http');
 var Client = require('node-rest-client').Client;
 var _ = require('lodash');
+var nodemailer = require("nodemailer");
+
+// create reusable transport method (opens pool of SMTP connections)
+var smtpTransport = nodemailer.createTransport("SMTP",{
+    service: "Gmail",
+    auth: {
+        user: "valeilegra@gmail.com",
+        pass: "ilegra2014"
+    }
+});
+
+function mailOptions(msg){
+	// setup e-mail data with unicode symbols
+	var mailOptions = {
+	    from: "Trello Ilegra ✔ <valeilegra@gmail.com>", // sender address
+	    to: "salerno.rafael@gmail.com", // list of receivers
+	    subject: "Trello ✔", // Subject line
+	    text: "Trello Hello world ✔", // plaintext body
+	    html: msg // html body
+	}
+	return mailOptions
+}
 
 
 exports.new_call = function (req, resp) {	
@@ -12,17 +34,40 @@ exports.new_call = function (req, resp) {
 			resp.setHeader("Content-Type", "text/plain");
 			var result = JSON.parse(data);
 
-			var text = 'integration Tests Fixed = '+result.testInfo.integrationTestsFixed + '\n' ;
-			text += 'integration Tests = '+result.testInfo.integrationTests  + '\n' ; 
-			text += 'unit Tests = '  +result.testInfo.unitTests  ; 
-
 			var fixed = result.testInfo.integrationTestsFixed;
 			var integration = result.testInfo.integrationTests;
 			var unit = result.testInfo.unitTests;
 
-			resp.send(text);	
+
+			resp.send(alert('test',fixed,integration,unit));	
 		});
 	});
+}
+
+
+function alert(card, integrationTestsFixed, integrationTests, unitTests) {
+	var res = "";
+
+	if(integrationTestsFixed < 1) res += "Integration Tests Fixed not found! ";
+	if(integrationTests < 1) res += "Integration Tests not found! ";
+	if(unitTests < 1) res += "Unit Tests not found! ";
+
+	var msg="";
+	if(res.length > 0) msg=  "Card: " + card + ". " + res;
+
+     // send mail with defined transport object
+		smtpTransport.sendMail(mailOptions(msg), function(error, response){
+		    if(error){
+		        console.log(error);
+		    }else{
+		        console.log("Message sent ");
+		    }
+
+		    // if you don't want to use this transport object anymore, uncomment following line
+		    //smtpTransport.close(); // shut down the connection pool, no more messages
+		});
+
+	return msg;
 }
 
 exports.callAllBords = function (req, resp) {	
@@ -36,6 +81,7 @@ exports.callAllBords = function (req, resp) {
 		});
 	});
 }
+
 
 exports.rawApiCall = function (req, resp) {	
 	http.get('http://www.mocky.io/v2/52f3766070d88c4f01c9111b', function (res) {
