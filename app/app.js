@@ -58,6 +58,7 @@ app.get('/hello.txt', function(req, res) {
 app.get('/raw_api_call', service.rawApiCall);
 app.get('/simpler_api_call', service.simplerApiCall);
 app.get('/project/:pIndex', service.projectByIndex);
+app.use(express.static(__dirname + '/public'));
 
 app.listen(3000);
 console.log('Listening on port 3000');

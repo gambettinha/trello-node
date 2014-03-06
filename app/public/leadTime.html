@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lead Time Chart</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Week', 'Real Throughput', 'Expected Throughput'],
+          ['03/03 - 09/03',  10,      16],
+          ['10/03 - 16/03',  16,      16],
+          ['17/03 - 23/03',  12,       16],
+          ['24/03 - 30/03',  17,      16],
+          ['31/03 - 06/04',  15,      16]
+        ]);
+
+        var options = {
+          title: 'Throughput'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>    
+  </head>
+  <body>
+    <div class="container">
+      <form class="form-horizontal" role="form" style="margin-top: 5%;">
+        <div class="form-group">
+          <label for="inputBoard" class="col-sm-2 control-label">Board</label>
+          <div class="col-sm-3">
+            <select class="form-control" id="inputBoard">
+              <option>Blah</option>
+              <option>Bl2h</option>
+              <option>Bleh</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputIni" class="col-sm-2 control-label">Starting Queue</label>
+          <div class="col-sm-3">
+            <select class="form-control" id="inputIni">
+              <option>Blah</option>
+              <option>Bl2h</option>
+              <option>Bleh</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEnd" class="col-sm-2 control-label">Ending Queue</label>
+          <div class="col-sm-3">
+            <select class="form-control" id="inputEnd">
+              <option>Blah</option>
+              <option>Bl2h</option>
+              <option>Bleh</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    </div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
