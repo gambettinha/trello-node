@@ -23,6 +23,7 @@ exports.new_call = function (req, resp) {
 			resp.send(text);	
 		});
 	});
+}
 
 exports.rawApiCall = function (req, resp) {	
 	http.get('http://www.mocky.io/v2/52f3766070d88c4f01c9111b', function (res) {
