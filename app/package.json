@@ -1,0 +1,16 @@
+{
+  "name": "hello-node",
+  "version": "0.0.1",
+  "description": "Hello world application in nodejs, to be used as bootstrap app during ilegra's hachathon",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matheus Boschetti",
+  "license": "BSD",
+  "dependencies": {
+    "express": "3.x",
+    "node-rest-client": "0.7.5",
+    "lodash": "~2.4.1"
+  }
+}
