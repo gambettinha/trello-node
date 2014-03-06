@@ -1,10 +1,11 @@
 'use strict';
 
-var express = require('express'),
-    app = express(),
-    service = require('./service'),
-    routes = require('./routes'),
-    api = require('./routes/api');
+var express = require('express');
+var app = express();
+var service = require('./service');
+var routes = require('./routes');
+var api = require('./routes/api');
+var leadTime = require('./service/leadTime');
 
 // Configuration
 app.configure(function(){
@@ -49,6 +50,7 @@ app.get('/new_call', service.new_call);
 app.get('/raw_api_call', service.rawApiCall);
 app.get('/simpler_api_call', service.simplerApiCall);
 app.get('/project/:pIndex', service.projectByIndex);
+app.get('/leadTime', leadTime.teste);
 
 app.get('*', routes.index);
 app.listen(3000);
