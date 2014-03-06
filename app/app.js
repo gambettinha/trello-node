@@ -5,6 +5,7 @@ var app = express();
 var service = require('./service');
 var routes = require('./routes');
 var api = require('./routes/api');
+var leadTime = require('./service/leadTime');
 
 
 // Configuration
@@ -59,6 +60,8 @@ app.get('/raw_api_call', service.rawApiCall);
 app.get('/simpler_api_call', service.simplerApiCall);
 app.get('/project/:pIndex', service.projectByIndex);
 app.use(express.static(__dirname + '/public'));
+
+app.get('/leadTime', leadTime.teste);
 
 app.listen(3000);
 console.log('Listening on port 3000');
